@@ -64,6 +64,19 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;color:var(--tx);
 .ci{width:100%;border:none;outline:none;font-size:11px;padding:5px;background:transparent;height:30px;font-family:inherit;text-align:center;resize:none}
 .ci:focus{background:#eef4ff}
 .rw{padding:8px 10px}
+/* Inspección pre-recorrido */
+.insp-wrap{padding:10px 12px;background:#f8fafc;border-bottom:1px solid var(--gb)}
+.insp-row{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid #eef0f4;flex-wrap:wrap}
+.insp-row:last-child{border-bottom:none}
+.insp-lbl{min-width:170px;font-size:13px;font-weight:600;color:var(--ts);padding-top:4px}
+.insp-opts{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.insp-opts label{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px;border:1.5px solid #ccc;cursor:pointer;transition:background .15s,border-color .15s;white-space:nowrap}
+.insp-opts input[type=radio]{display:none}
+.insp-opts label.bue:has(input:checked){background:#d4edda;border-color:#28a745;color:#155724}
+.insp-opts label.reg:has(input:checked){background:#fff3cd;border-color:#ffc107;color:#856404}
+.insp-opts label.mal:has(input:checked){background:#f8d7da;border-color:#dc3545;color:#721c24}
+.insp-obs{flex:1;min-width:140px;border:1px solid #d0d5dd;border-radius:6px;padding:4px 8px;font-size:12px;font-family:inherit;outline:none;resize:none;height:30px;background:#fff}
+.insp-obs:focus{border-color:var(--am);background:#eef4ff}
 .ri{display:flex;gap:6px;align-items:center;margin-bottom:5px;flex-wrap:wrap}
 .ri input{flex:1;border:none;border-bottom:1px solid var(--gb);font-size:13px;padding:4px;outline:none;background:transparent;font-family:inherit;min-width:80px}
 .ri input:focus{background:#eef4ff;border-radius:4px}
@@ -250,6 +263,74 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;color:var(--tx);
         </td>
       </tr>
       <tr><td class="lb">Observaciones</td><td class="vl"><textarea id="ins-obs" placeholder="Ej: Sin novedades..."></textarea></td></tr>
+      <tr><td colspan="2" class="sh">🔍 Inspección pre-recorrido del vehículo</td></tr>
+      <tr><td colspan="2" style="padding:0">
+        <div class="insp-wrap">
+          <div class="insp-row">
+            <div class="insp-lbl">🛢️ Aceite</div>
+            <div class="insp-opts">
+              <label class="bue"><input type="radio" name="insp-aceite" value="Bueno"/>✅ Bueno</label>
+              <label class="reg"><input type="radio" name="insp-aceite" value="Regular"/>⚠️ Regular</label>
+              <label class="mal"><input type="radio" name="insp-aceite" value="Malo"/>❌ Malo</label>
+            </div>
+            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-aceite"></textarea>
+          </div>
+          <div class="insp-row">
+            <div class="insp-lbl">💧 Agua</div>
+            <div class="insp-opts">
+              <label class="bue"><input type="radio" name="insp-agua" value="Bueno"/>✅ Bueno</label>
+              <label class="reg"><input type="radio" name="insp-agua" value="Regular"/>⚠️ Regular</label>
+              <label class="mal"><input type="radio" name="insp-agua" value="Malo"/>❌ Malo</label>
+            </div>
+            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-agua"></textarea>
+          </div>
+          <div class="insp-row">
+            <div class="insp-lbl">🌡️ Refrigerante</div>
+            <div class="insp-opts">
+              <label class="bue"><input type="radio" name="insp-refri" value="Bueno"/>✅ Bueno</label>
+              <label class="reg"><input type="radio" name="insp-refri" value="Regular"/>⚠️ Regular</label>
+              <label class="mal"><input type="radio" name="insp-refri" value="Malo"/>❌ Malo</label>
+            </div>
+            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-refri"></textarea>
+          </div>
+          <div class="insp-row">
+            <div class="insp-lbl">🔋 Batería</div>
+            <div class="insp-opts">
+              <label class="bue"><input type="radio" name="insp-bateria" value="Bueno"/>✅ Bueno</label>
+              <label class="reg"><input type="radio" name="insp-bateria" value="Regular"/>⚠️ Regular</label>
+              <label class="mal"><input type="radio" name="insp-bateria" value="Malo"/>❌ Malo</label>
+            </div>
+            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-bateria"></textarea>
+          </div>
+          <div class="insp-row">
+            <div class="insp-lbl">🚗 Aire de llantas</div>
+            <div class="insp-opts">
+              <label class="bue"><input type="radio" name="insp-llantas" value="Bueno"/>✅ Bueno</label>
+              <label class="reg"><input type="radio" name="insp-llantas" value="Regular"/>⚠️ Regular</label>
+              <label class="mal"><input type="radio" name="insp-llantas" value="Malo"/>❌ Malo</label>
+            </div>
+            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-llantas"></textarea>
+          </div>
+          <div class="insp-row">
+            <div class="insp-lbl">🚘 Novedades carrocería</div>
+            <div class="insp-opts">
+              <label class="bue"><input type="radio" name="insp-carroceria" value="Bueno"/>✅ Bueno</label>
+              <label class="reg"><input type="radio" name="insp-carroceria" value="Regular"/>⚠️ Regular</label>
+              <label class="mal"><input type="radio" name="insp-carroceria" value="Malo"/>❌ Malo</label>
+            </div>
+            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-carroceria"></textarea>
+          </div>
+          <div class="insp-row">
+            <div class="insp-lbl">📊 Novedades tablero</div>
+            <div class="insp-opts">
+              <label class="bue"><input type="radio" name="insp-tablero" value="Bueno"/>✅ Bueno</label>
+              <label class="reg"><input type="radio" name="insp-tablero" value="Regular"/>⚠️ Regular</label>
+              <label class="mal"><input type="radio" name="insp-tablero" value="Malo"/>❌ Malo</label>
+            </div>
+            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-tablero"></textarea>
+          </div>
+        </div>
+      </td></tr>
       <tr><td colspan="2" class="ch" style="display:flex;justify-content:space-between;align-items:center;padding:11px 16px">
         📋 Recorrido diario
         <button class="btn bo" style="padding:4px 12px;font-size:12px;background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.5)" onclick="addR()">+ Agregar fila</button>
@@ -419,7 +500,7 @@ function autoSaveNov(){
 function getM(){try{return JSON.parse(localStorage.getItem(DMK))||[];}catch{return[]}}
 function setM(a){localStorage.setItem(DMK,JSON.stringify(a))}
 
-const CRONO={lun:'Samborondón + Conalba',mar:'Ciudad Celeste',mie:'Villa Club + Fincas',jue:'Joya + Villas del Rey',vie:'Ceibos + Bosques'};
+const CRONO={lun:'Piazza Samborondón + Sora Plazza',mar:'Piazza Ciudad Celeste + Conalba + Murano Plaza',mie:'Piazza La Joya + Piazza Villas del Rey',jue:'Piazza Ceibos + Piazza Bosques',vie:'Piazza Villa Club + Piazza FCG + Mausoleo Parque de la Paz + Casa ABA Palmar'};
 const VEHS=['D-Max','JAC','Furgoneta'];
 const CV={'D-Max':'#2e6da4','JAC':'#2e7d32','Furgoneta':'#e65100'};
 const PF={'D-Max':'GTR-5602','JAC':'GTA-4116','Furgoneta':'GCA-5826'};
@@ -499,6 +580,9 @@ function limpiar(){
   document.getElementById('ins-dur').textContent='— min';
   document.getElementById('crono-inc').checked=true;
   document.getElementById('rid').value='';
+  // Limpiar inspección pre-recorrido
+  document.querySelectorAll('.insp-opts input[type=radio]').forEach(rb=>rb.checked=false);
+  ['obs-aceite','obs-agua','obs-refri','obs-bateria','obs-llantas','obs-carroceria','obs-tablero'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
   setCrono();addR();
 }
 
@@ -533,7 +617,16 @@ function leerF(){
     baseFin:document.getElementById('base-fin').value.trim(),
     horaFin:document.getElementById('hora-fin').value,
     novedades:document.getElementById('novedades').value.trim(),
-    guardadoEn:new Date().toISOString()
+    guardadoEn:new Date().toISOString(),
+    inspeccionVeh:{
+      aceite:{estado:document.querySelector('input[name="insp-aceite"]:checked')?.value||'',obs:document.getElementById('obs-aceite').value.trim()},
+      agua:{estado:document.querySelector('input[name="insp-agua"]:checked')?.value||'',obs:document.getElementById('obs-agua').value.trim()},
+      refrigerante:{estado:document.querySelector('input[name="insp-refri"]:checked')?.value||'',obs:document.getElementById('obs-refri').value.trim()},
+      bateria:{estado:document.querySelector('input[name="insp-bateria"]:checked')?.value||'',obs:document.getElementById('obs-bateria').value.trim()},
+      llantas:{estado:document.querySelector('input[name="insp-llantas"]:checked')?.value||'',obs:document.getElementById('obs-llantas').value.trim()},
+      carroceria:{estado:document.querySelector('input[name="insp-carroceria"]:checked')?.value||'',obs:document.getElementById('obs-carroceria').value.trim()},
+      tablero:{estado:document.querySelector('input[name="insp-tablero"]:checked')?.value||'',obs:document.getElementById('obs-tablero').value.trim()}
+    }
   };
 }
 
@@ -558,6 +651,16 @@ function cargarF(r){
   document.getElementById('ins-fin').value=r.inspeccionFin||'';
   document.getElementById('ins-obs').value=r.inspeccionObs||'';
   calcIns();
+  // Inspección pre-recorrido
+  const iv=r.inspeccionVeh||{};
+  const campos=['aceite','agua','refrigerante','bateria','llantas','carroceria','tablero'];
+  const names=['insp-aceite','insp-agua','insp-refri','insp-bateria','insp-llantas','insp-carroceria','insp-tablero'];
+  const obsIds=['obs-aceite','obs-agua','obs-refri','obs-bateria','obs-llantas','obs-carroceria','obs-tablero'];
+  campos.forEach((c,i)=>{
+    const dat=iv[c]||{};
+    if(dat.estado){const rb=document.querySelector(`input[name="${names[i]}"][value="${dat.estado}"]`);if(rb)rb.checked=true;}
+    document.getElementById(obsIds[i]).value=dat.obs||'';
+  });
   document.getElementById('km-ini').value=r.kmInicio||'';
   document.getElementById('km-fin').value=r.kmFin||'';
   document.getElementById('base-fin').value=r.baseFin||'';
@@ -859,6 +962,14 @@ function genPDF(r){
     if(r.inspeccionPiazza)tbl([['Piazza',r.inspeccionPiazza]]);
     if(r.inspeccionInicio||r.inspeccionFin){doc.autoTable({startY:y,head:[['Hora inicio','Hora fin','Duración']],body:[[r.inspeccionInicio||'—',r.inspeccionFin||'—',r.inspeccionDuracion||'—']],styles:{fontSize:9,cellPadding:[2,3,2,3],valign:'middle',lineColor:gB,lineWidth:0.2},headStyles:{fillColor:aC,textColor:aO,fontStyle:'bold',fontSize:8},margin:{left:M,right:M}});y=doc.lastAutoTable.finalY}
     if(r.inspeccionObs)tbl([['Observaciones',r.inspeccionObs]]);
+  }
+  // Inspección pre-recorrido en PDF
+  const iv=r.inspeccionVeh||{};
+  const ivCampos=[['Aceite',iv.aceite],['Agua',iv.agua],['Refrigerante',iv.refrigerante],['Batería',iv.bateria],['Aire de llantas',iv.llantas],['Novedades carrocería',iv.carroceria],['Novedades tablero',iv.tablero]];
+  const ivRows=ivCampos.filter(([,v])=>v&&(v.estado||v.obs)).map(([n,v])=>[n,v.estado||'—',v.obs||'']);
+  if(ivRows.length){
+    y+=4;sec('Inspección pre-recorrido del vehículo');
+    doc.autoTable({startY:y,head:[['Ítem','Estado','Observación']],body:ivRows,styles:{fontSize:8,cellPadding:[2,3,2,3],valign:'middle',lineColor:gB,lineWidth:0.2},headStyles:{fillColor:aM,textColor:bl,fontStyle:'bold',fontSize:8},columnStyles:{0:{cellWidth:52,fillColor:aC,textColor:aO,fontStyle:'bold'},1:{cellWidth:28,halign:'center'},2:{cellWidth:'auto'}},didDrawCell:(data)=>{if(data.section==='body'&&data.column.index===1){const v=data.cell.raw;const cl=v==='Bueno'?[40,167,69]:v==='Regular'?[255,193,7]:v==='Malo'?[220,53,69]:[150,150,150];doc.setFillColor(...cl);doc.setDrawColor(...cl);doc.roundedRect(data.cell.x+2,data.cell.y+1.5,data.cell.width-4,data.cell.height-3,2,2,'FD');doc.setTextColor(255,255,255);doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text(v||'—',data.cell.x+data.cell.width/2,data.cell.y+data.cell.height/2+0.5,{align:'center',baseline:'middle'});}},alternateRowStyles:{fillColor:gC},margin:{left:M,right:M}});y=doc.lastAutoTable.finalY;
   }
   y+=4;sec('Recorrido diario');
   const rR=(r.recorridos||[]).map((x,i)=>typeof x==='object'?[i+1,x.desde||'—',x.hasta||'—',x.actividad||'—']:[i+1,x,'','']);
