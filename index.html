@@ -64,8 +64,18 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;color:var(--tx);
 .ci{width:100%;border:none;outline:none;font-size:11px;padding:5px;background:transparent;height:30px;font-family:inherit;text-align:center;resize:none}
 .ci:focus{background:#eef4ff}
 .rw{padding:8px 10px}
-/* Inspección pre-recorrido */
-.insp-wrap{padding:10px 12px;background:#f8fafc;border-bottom:1px solid var(--gb)}
+/* Inspección pre-recorrido desplegable */
+.insp-toggle{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:10px 14px;background:#f0f4f8;border-bottom:1px solid var(--gb);user-select:none;transition:background .15s}
+.insp-toggle:hover{background:#e4eaf0}
+.insp-toggle-left{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--ao)}
+.insp-arrow{font-size:13px;transition:transform .25s;color:var(--am)}
+.insp-arrow.open{transform:rotate(180deg)}
+.insp-badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;background:#e2e8f0;color:#555}
+.insp-badge.ok{background:#d4edda;color:#155724}
+.insp-badge.warn{background:#fff3cd;color:#856404}
+.insp-badge.err{background:#f8d7da;color:#721c24}
+.insp-wrap{padding:10px 12px;background:#f8fafc;border-bottom:1px solid var(--gb);display:none}
+.insp-wrap.abierto{display:block}
 .insp-row{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid #eef0f4;flex-wrap:wrap}
 .insp-row:last-child{border-bottom:none}
 .insp-lbl{min-width:170px;font-size:13px;font-weight:600;color:var(--ts);padding-top:4px}
@@ -252,6 +262,79 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;color:var(--tx);
           <div class="cc"><div class="cl" id="lbl-vie">Viernes</div><textarea class="ci" id="crono-vie"></textarea></div>
         </div>
       </td></tr>
+      <tr><td colspan="2" style="padding:0">
+        <div class="insp-toggle" onclick="toggleInsp()">
+          <div class="insp-toggle-left">🔍 Inspección pre-recorrido del vehículo <span class="insp-badge" id="insp-badge">Sin completar</span></div>
+          <span class="insp-arrow" id="insp-arrow">▼</span>
+        </div>
+      </td></tr>
+      <tr><td colspan="2" style="padding:0">
+        <div class="insp-wrap" id="insp-wrap">
+          <div class="insp-row">
+            <div class="insp-lbl">🛢️ Aceite</div>
+            <div class="insp-opts">
+              <label class="bue"><input type="radio" onchange="updInspBadge()" name="insp-aceite" value="Bueno"/>✅ Bueno</label>
+              <label class="reg"><input type="radio" onchange="updInspBadge()" name="insp-aceite" value="Regular"/>⚠️ Regular</label>
+              <label class="mal"><input type="radio" onchange="updInspBadge()" name="insp-aceite" value="Malo"/>❌ Malo</label>
+            </div>
+            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-aceite"></textarea>
+          </div>
+          <div class="insp-row">
+            <div class="insp-lbl">💧 Agua</div>
+            <div class="insp-opts">
+              <label class="bue"><input type="radio" onchange="updInspBadge()" name="insp-agua" value="Bueno"/>✅ Bueno</label>
+              <label class="reg"><input type="radio" onchange="updInspBadge()" name="insp-agua" value="Regular"/>⚠️ Regular</label>
+              <label class="mal"><input type="radio" onchange="updInspBadge()" name="insp-agua" value="Malo"/>❌ Malo</label>
+            </div>
+            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-agua"></textarea>
+          </div>
+          <div class="insp-row">
+            <div class="insp-lbl">🌡️ Refrigerante</div>
+            <div class="insp-opts">
+              <label class="bue"><input type="radio" onchange="updInspBadge()" name="insp-refri" value="Bueno"/>✅ Bueno</label>
+              <label class="reg"><input type="radio" onchange="updInspBadge()" name="insp-refri" value="Regular"/>⚠️ Regular</label>
+              <label class="mal"><input type="radio" onchange="updInspBadge()" name="insp-refri" value="Malo"/>❌ Malo</label>
+            </div>
+            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-refri"></textarea>
+          </div>
+          <div class="insp-row">
+            <div class="insp-lbl">🔋 Batería</div>
+            <div class="insp-opts">
+              <label class="bue"><input type="radio" onchange="updInspBadge()" name="insp-bateria" value="Bueno"/>✅ Bueno</label>
+              <label class="reg"><input type="radio" onchange="updInspBadge()" name="insp-bateria" value="Regular"/>⚠️ Regular</label>
+              <label class="mal"><input type="radio" onchange="updInspBadge()" name="insp-bateria" value="Malo"/>❌ Malo</label>
+            </div>
+            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-bateria"></textarea>
+          </div>
+          <div class="insp-row">
+            <div class="insp-lbl">🚗 Aire de llantas</div>
+            <div class="insp-opts">
+              <label class="bue"><input type="radio" onchange="updInspBadge()" name="insp-llantas" value="Bueno"/>✅ Bueno</label>
+              <label class="reg"><input type="radio" onchange="updInspBadge()" name="insp-llantas" value="Regular"/>⚠️ Regular</label>
+              <label class="mal"><input type="radio" onchange="updInspBadge()" name="insp-llantas" value="Malo"/>❌ Malo</label>
+            </div>
+            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-llantas"></textarea>
+          </div>
+          <div class="insp-row">
+            <div class="insp-lbl">🚘 Novedades carrocería</div>
+            <div class="insp-opts">
+              <label class="bue"><input type="radio" onchange="updInspBadge()" name="insp-carroceria" value="Bueno"/>✅ Bueno</label>
+              <label class="reg"><input type="radio" onchange="updInspBadge()" name="insp-carroceria" value="Regular"/>⚠️ Regular</label>
+              <label class="mal"><input type="radio" onchange="updInspBadge()" name="insp-carroceria" value="Malo"/>❌ Malo</label>
+            </div>
+            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-carroceria"></textarea>
+          </div>
+          <div class="insp-row">
+            <div class="insp-lbl">📊 Novedades tablero</div>
+            <div class="insp-opts">
+              <label class="bue"><input type="radio" onchange="updInspBadge()" name="insp-tablero" value="Bueno"/>✅ Bueno</label>
+              <label class="reg"><input type="radio" onchange="updInspBadge()" name="insp-tablero" value="Regular"/>⚠️ Regular</label>
+              <label class="mal"><input type="radio" onchange="updInspBadge()" name="insp-tablero" value="Malo"/>❌ Malo</label>
+            </div>
+            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-tablero"></textarea>
+          </div>
+        </div>
+      </td></tr>
       <tr><td colspan="2" class="sh">Inspección semanal</td></tr>
       <tr><td class="lb">Nombre de la Piazza</td><td class="vl"><input type="text" id="ins-piazza" placeholder="Ej: Piazza Ciudad Celeste"/></td></tr>
       <tr><td class="lb">Inicio / Fin / Duración</td>
@@ -263,74 +346,6 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;color:var(--tx);
         </td>
       </tr>
       <tr><td class="lb">Observaciones</td><td class="vl"><textarea id="ins-obs" placeholder="Ej: Sin novedades..."></textarea></td></tr>
-      <tr><td colspan="2" class="sh">🔍 Inspección pre-recorrido del vehículo</td></tr>
-      <tr><td colspan="2" style="padding:0">
-        <div class="insp-wrap">
-          <div class="insp-row">
-            <div class="insp-lbl">🛢️ Aceite</div>
-            <div class="insp-opts">
-              <label class="bue"><input type="radio" name="insp-aceite" value="Bueno"/>✅ Bueno</label>
-              <label class="reg"><input type="radio" name="insp-aceite" value="Regular"/>⚠️ Regular</label>
-              <label class="mal"><input type="radio" name="insp-aceite" value="Malo"/>❌ Malo</label>
-            </div>
-            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-aceite"></textarea>
-          </div>
-          <div class="insp-row">
-            <div class="insp-lbl">💧 Agua</div>
-            <div class="insp-opts">
-              <label class="bue"><input type="radio" name="insp-agua" value="Bueno"/>✅ Bueno</label>
-              <label class="reg"><input type="radio" name="insp-agua" value="Regular"/>⚠️ Regular</label>
-              <label class="mal"><input type="radio" name="insp-agua" value="Malo"/>❌ Malo</label>
-            </div>
-            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-agua"></textarea>
-          </div>
-          <div class="insp-row">
-            <div class="insp-lbl">🌡️ Refrigerante</div>
-            <div class="insp-opts">
-              <label class="bue"><input type="radio" name="insp-refri" value="Bueno"/>✅ Bueno</label>
-              <label class="reg"><input type="radio" name="insp-refri" value="Regular"/>⚠️ Regular</label>
-              <label class="mal"><input type="radio" name="insp-refri" value="Malo"/>❌ Malo</label>
-            </div>
-            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-refri"></textarea>
-          </div>
-          <div class="insp-row">
-            <div class="insp-lbl">🔋 Batería</div>
-            <div class="insp-opts">
-              <label class="bue"><input type="radio" name="insp-bateria" value="Bueno"/>✅ Bueno</label>
-              <label class="reg"><input type="radio" name="insp-bateria" value="Regular"/>⚠️ Regular</label>
-              <label class="mal"><input type="radio" name="insp-bateria" value="Malo"/>❌ Malo</label>
-            </div>
-            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-bateria"></textarea>
-          </div>
-          <div class="insp-row">
-            <div class="insp-lbl">🚗 Aire de llantas</div>
-            <div class="insp-opts">
-              <label class="bue"><input type="radio" name="insp-llantas" value="Bueno"/>✅ Bueno</label>
-              <label class="reg"><input type="radio" name="insp-llantas" value="Regular"/>⚠️ Regular</label>
-              <label class="mal"><input type="radio" name="insp-llantas" value="Malo"/>❌ Malo</label>
-            </div>
-            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-llantas"></textarea>
-          </div>
-          <div class="insp-row">
-            <div class="insp-lbl">🚘 Novedades carrocería</div>
-            <div class="insp-opts">
-              <label class="bue"><input type="radio" name="insp-carroceria" value="Bueno"/>✅ Bueno</label>
-              <label class="reg"><input type="radio" name="insp-carroceria" value="Regular"/>⚠️ Regular</label>
-              <label class="mal"><input type="radio" name="insp-carroceria" value="Malo"/>❌ Malo</label>
-            </div>
-            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-carroceria"></textarea>
-          </div>
-          <div class="insp-row">
-            <div class="insp-lbl">📊 Novedades tablero</div>
-            <div class="insp-opts">
-              <label class="bue"><input type="radio" name="insp-tablero" value="Bueno"/>✅ Bueno</label>
-              <label class="reg"><input type="radio" name="insp-tablero" value="Regular"/>⚠️ Regular</label>
-              <label class="mal"><input type="radio" name="insp-tablero" value="Malo"/>❌ Malo</label>
-            </div>
-            <textarea class="insp-obs" placeholder="Observación (opcional)..." id="obs-tablero"></textarea>
-          </div>
-        </div>
-      </td></tr>
       <tr><td colspan="2" class="ch" style="display:flex;justify-content:space-between;align-items:center;padding:11px 16px">
         📋 Recorrido diario
         <button class="btn bo" style="padding:4px 12px;font-size:12px;background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.5)" onclick="addR()">+ Agregar fila</button>
@@ -564,6 +579,22 @@ function calcKm(){
   document.getElementById('km-cel').textContent=ok?t+' km':'— km';
   document.getElementById('km-bar').textContent=ok?'Total de km recorridos al día: '+t+' km':'Total de km recorridos al día: —';
 }
+function toggleInsp(){
+  const w=document.getElementById('insp-wrap'),a=document.getElementById('insp-arrow');
+  w.classList.toggle('abierto');a.classList.toggle('open');
+}
+function updInspBadge(){
+  const names=['insp-aceite','insp-agua','insp-refri','insp-bateria','insp-llantas','insp-carroceria','insp-tablero'];
+  const estados=names.map(n=>(document.querySelector(`input[name="${n}"]:checked`)?.value||''));
+  const total=estados.filter(e=>e).length;
+  const badge=document.getElementById('insp-badge');if(!badge)return;
+  if(total===0){badge.textContent='Sin completar';badge.className='insp-badge';return;}
+  const malos=estados.filter(e=>e==='Malo').length;
+  const regulares=estados.filter(e=>e==='Regular').length;
+  if(malos>0){badge.textContent=`${total}/7 · ${malos} ❌ Malo`;badge.className='insp-badge err';}
+  else if(regulares>0){badge.textContent=`${total}/7 · ${regulares} ⚠️ Regular`;badge.className='insp-badge warn';}
+  else{badge.textContent=`${total}/7 ✅ Todo bueno`;badge.className='insp-badge ok';}
+}
 function calcIns(){
   const a=document.getElementById('ins-ini').value,b=document.getElementById('ins-fin').value,el=document.getElementById('ins-dur');
   if(!a||!b){el.textContent='— min';return}
@@ -583,6 +614,10 @@ function limpiar(){
   // Limpiar inspección pre-recorrido
   document.querySelectorAll('.insp-opts input[type=radio]').forEach(rb=>rb.checked=false);
   ['obs-aceite','obs-agua','obs-refri','obs-bateria','obs-llantas','obs-carroceria','obs-tablero'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  updInspBadge();
+  // Cerrar panel si estaba abierto
+  const iw=document.getElementById('insp-wrap'),ia=document.getElementById('insp-arrow');
+  if(iw){iw.classList.remove('abierto');}if(ia){ia.classList.remove('open');}
   setCrono();addR();
 }
 
