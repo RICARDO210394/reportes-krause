@@ -65,7 +65,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;color:var(--tx);
 .ci:focus{background:#eef4ff}
 .rw{padding:8px 10px}
 /* Inspección pre-recorrido desplegable */
-.insp-toggle{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:10px 14px;background:#f0f4f8;border-bottom:1px solid var(--gb);user-select:none;transition:background .15s}
+.insp-toggle{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:10px 14px;background:#f0f4f8;border-bottom:1px solid var(--gb);user-select:none;transition:background .15s;width:100%;box-sizing:border-box}
 .insp-toggle:hover{background:#e4eaf0}
 .insp-toggle-left{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--ao)}
 .insp-arrow{font-size:13px;transition:transform .25s;color:var(--am)}
@@ -263,7 +263,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;color:var(--tx);
         </div>
       </td></tr>
       <tr><td colspan="2" style="padding:0">
-        <div class="insp-toggle" onclick="toggleInsp()">
+        <div class="insp-toggle" onclick="const w=document.getElementById('insp-wrap'),a=document.getElementById('insp-arrow');w.classList.toggle('abierto');a.classList.toggle('open');">
           <div class="insp-toggle-left">🔍 Inspección pre-recorrido del vehículo <span class="insp-badge" id="insp-badge">Sin completar</span></div>
           <span class="insp-arrow" id="insp-arrow">▼</span>
         </div>
